@@ -8,11 +8,11 @@ public interface UserDao {
 
     String add(User user);
 
-    String update(User user);
+    List<User> update(User user);
 
     List<User> getAll();
 
     String remove(User user);
 
-    User findUserByEmail(String email);
+    List<User> findUserByEmail(String email);
 }

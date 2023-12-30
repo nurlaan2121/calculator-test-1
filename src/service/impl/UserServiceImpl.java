@@ -1,4 +1,123 @@
 package service.impl;
 
-public class UserServiceImpl {
+import dao.impl.UserDaoImpl;
+import models.User;
+import service.Generickchecks;
+import service.MyExceptions.Notfoud;
+import service.UserService;
+
+import java.nio.CharBuffer;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
+
+public class UserServiceImpl implements UserService {
+    private static Long id = 0L;
+    final UserDaoImpl userDao;
+
+    public UserServiceImpl(UserDaoImpl userDao) {
+        this.userDao = userDao;
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userDao.getAll().stream().filter(user -> user.getLogin().equalsIgnoreCase(email)).findFirst().orElseThrow(() -> new Notfoud("Not found"));
+    }
+
+    @Override
+    public String findUserByPost(String posttt) {
+        return userDao.getAll().stream().flatMap(user -> user.getPosts().stream().filter(post -> post.equalsIgnoreCase(posttt))).findFirst().orElseThrow(() -> new Notfoud("Not found"));
+
+    }
+
+    @Override
+    public String registratsia(User user) {
+        while (true) {
+            System.out.println("Write email:");
+            String email = new Scanner(System.in).nextLine();
+            if (Generickchecks.checkForEmail(email) && Generickchecks.unicalEmail(email, userDao.getAll())) {
+                user.setLogin(email);
+                user.setId(++UserServiceImpl.id);
+                break;
+            }
+        }
+        while (true) {
+            System.out.println("Write password");
+            String password = new Scanner(System.in).nextLine();
+            if (password.length() > 3) {
+                user.setPassword(password);
+                userDao.add(user);
+                break;
+            }
+        }
+        return "Success";
+    }
+
+    @Override
+    public User login(User user) {
+        System.out.println("Write email: ");
+        String email = new Scanner(System.in).nextLine();
+        System.out.println("Write password: ");
+        String password = new Scanner(System.in).nextLine();
+        return userDao.getAll().stream().filter(user1 -> user1.getLogin().equalsIgnoreCase(email) && user1.getPassword().equalsIgnoreCase(password)).findFirst().orElseThrow(() -> new Notfoud("Write correct please"));
+    }
+
+    @Override
+    public String updateMyProfile(User user) {
+        System.out.println("""
+                Choose command for update:
+                1.email
+                2.password
+                               
+                """);
+        try {
+            int action = new Scanner(System.in).nextInt();
+            switch (action) {
+                case 1 -> {
+                    while (true) {
+                        System.out.println("Write new email: ");
+                        String newEmail = new Scanner(System.in).nextLine();
+                        if (Generickchecks.checkForEmail(newEmail) && Generickchecks.unicalEmail(newEmail, userDao.getAll())) {
+                            user.setLogin(newEmail);
+                            return "Success";
+                        }
+                    }
+                }
+                case 2 -> {
+                    while (true) {
+                        System.out.println("Write new password: ");
+                        String newPassword = new Scanner(System.in).nextLine();
+                        if (newPassword.length() > 3) {
+                            user.setPassword(newPassword);
+                            return "Success";
+                        }
+                    }
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Write number please");
+        }
+        return "Write number";
+    }
+
+
+
+        @Override
+        public String removeMyAccaunt (User user){
+            userDao.remove(user);
+            return "Success";
+        }
+
+        @Override
+        public void MyProfile (User user){
+            System.out.println(user);
+        }
+
+    @Override
+    public void addnewPost(User user) {
+        System.out.println("Write post: ");
+        List<String> posts = user.getPosts();
+        posts.add(new Scanner(System.in).nextLine());
+        user.setPosts(posts);
+    }
 }
