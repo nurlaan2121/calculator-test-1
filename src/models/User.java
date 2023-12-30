@@ -1,5 +1,8 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private Long id;
@@ -8,12 +11,12 @@ public class User {
 
     private String password;
 
-    private String posts;
+    private List<String> posts = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, String login, String password, String posts) {
+    public User(Long id, String login, String password, List<String> posts) {
         this.id = id;
         Login = login;
         this.password = password;
@@ -44,14 +47,13 @@ public class User {
         this.password = password;
     }
 
-    public String getPosts() {
+    public List<String> getPosts() {
         return posts;
     }
 
-    public void setPosts(String posts) {
+    public void setPosts(List<String> posts) {
         this.posts = posts;
     }
-
 
     @Override
     public String toString() {

@@ -1,33 +1,44 @@
 package dao.impl;
 
 import dao.UserDao;
+import db.DataBase;
 import models.User;
 
+import java.util.Date;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    @Override
-    public String add(User user) {
-        return null;
+    final DataBase dataBase;
+
+    public UserDaoImpl(DataBase dataBase) {
+        this.dataBase = dataBase;
     }
 
     @Override
-    public String update(User user) {
-        return null;
+    public String add(User user){
+        dataBase.save(user);
+        return "Success";
+    }
+
+    @Override
+    public List<User> update(User user) {
+        return dataBase.getAll();
+
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return dataBase.getAll();
     }
 
     @Override
     public String remove(User user) {
-        return null;
+        dataBase.remove(user);
+        return "Success";
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        return null;
+    public List<User> findUserByEmail(String email) {
+        return  dataBase.getAll();
     }
 }
