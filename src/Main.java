@@ -17,11 +17,13 @@ public class Main {
                 int numberOne = scanner.nextInt();
                 System.out.print("Enter number two: ");
                 int numberTwo = scanner.nextInt();
-                System.out.print("Enter action(+/-: ");
+                System.out.print("Enter action(    {+} || {-} || {/} || {*}  ) ");
                 String action = scanForStr.nextLine();
                 switch (action){
                     case "+" -> System.out.println("Result: "+ service.toFold(numberOne, numberTwo));
                     case  "-" -> System.out.println("Result: "+ service.subtraction(numberOne, numberTwo));
+                    case  "/" -> System.out.println("Result: " + service.device(numberOne,numberTwo));
+                    case  "*" -> System.out.println("Result: " + service.add(numberOne,numberTwo));
                 }
             } catch (InputMismatchException e){
                 System.out.println("Enter valid integer");
