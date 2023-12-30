@@ -13,6 +13,7 @@ public class Main {
         LOOP:
         while (true){
             try {
+                System.out.println("\n");
                 System.out.print("Enter number one: ");
                 int numberOne = scanner.nextInt();
                 System.out.print("Enter number two: ");
@@ -24,6 +25,7 @@ public class Main {
                     case  "-" -> System.out.println("Result: "+ service.subtraction(numberOne, numberTwo));
                     case  "/" -> System.out.println("Result: " + service.device(numberOne,numberTwo));
                     case  "*" -> System.out.println("Result: " + service.add(numberOne,numberTwo));
+                    default -> System.out.println("Incorrect choice");
                 }
             } catch (InputMismatchException e){
                 System.out.println("Enter valid integer");
