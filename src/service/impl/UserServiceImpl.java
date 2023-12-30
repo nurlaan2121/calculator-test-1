@@ -2,18 +2,17 @@ package service.impl;
 
 import dao.impl.UserDaoImpl;
 import models.User;
-import service.Generickchecks;
-import service.MyExceptions.Notfoud;
+import MyExceptions.Notfoud;
 import service.UserService;
 
-import java.nio.CharBuffer;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserServiceImpl implements UserService {
     private static Long id = 0L;
-    final UserDaoImpl userDao;
+    private final UserDaoImpl userDao;
 
     public UserServiceImpl(UserDaoImpl userDao) {
         this.userDao = userDao;
@@ -21,12 +20,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
-        return userDao.getAll().stream().filter(user -> user.getLogin().equalsIgnoreCase(email)).findFirst().orElseThrow(() -> new Notfoud("Not found"));
+        return userDao.getAll().stream()
+                .filter(user -> user.getLogin().equalsIgnoreCase(email))
+                .findFirst()
+                .orElseThrow(() -> new Notfoud("Not found"));
     }
 
     @Override
     public String findUserByPost(String posttt) {
-        return userDao.getAll().stream().flatMap(user -> user.getPosts().stream().filter(post -> post.equalsIgnoreCase(posttt))).findFirst().orElseThrow(() -> new Notfoud("Not found"));
+        return userDao.getAll().stream()
+                .flatMap(user -> user.getPosts().stream()
+                        .filter(post -> post.equalsIgnoreCase(posttt)))
+                .findFirst()
+                .orElseThrow(() -> new Notfoud("Not found"));
 
     }
 
@@ -46,11 +52,10 @@ public class UserServiceImpl implements UserService {
             String password = new Scanner(System.in).nextLine();
             if (password.length() > 3) {
                 user.setPassword(password);
-                userDao.add(user);
                 break;
             }
         }
-        return "Success";
+        return userDao.add(user);
     }
 
     @Override
@@ -59,7 +64,9 @@ public class UserServiceImpl implements UserService {
         String email = new Scanner(System.in).nextLine();
         System.out.println("Write password: ");
         String password = new Scanner(System.in).nextLine();
-        return userDao.getAll().stream().filter(user1 -> user1.getLogin().equalsIgnoreCase(email) && user1.getPassword().equalsIgnoreCase(password)).findFirst().orElseThrow(() -> new Notfoud("Write correct please"));
+        return userDao.getAll().stream()
+                .filter(user1 -> user1.getLogin().equalsIgnoreCase(email) && user1.getPassword().equalsIgnoreCase(password))
+                .findFirst().orElseThrow(() -> new Notfoud("Write correct please"));
     }
 
     @Override
@@ -79,7 +86,7 @@ public class UserServiceImpl implements UserService {
                         String newEmail = new Scanner(System.in).nextLine();
                         if (Generickchecks.checkForEmail(newEmail) && Generickchecks.unicalEmail(newEmail, userDao.getAll())) {
                             user.setLogin(newEmail);
-                            return "Success";
+                            break;
                         }
                     }
                 }
@@ -89,13 +96,13 @@ public class UserServiceImpl implements UserService {
                         String newPassword = new Scanner(System.in).nextLine();
                         if (newPassword.length() > 3) {
                             user.setPassword(newPassword);
-                            return "Success";
+                            break;
                         }
                     }
                 }
             }
         } catch (InputMismatchException e) {
-            System.out.println("Write number please");
+            return "Write number please";
         }
         return "Write number";
     }
@@ -116,7 +123,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addnewPost(User user) {
         System.out.println("Write post: ");
-        List<String> posts = user.getPosts();
+        List<String> posts = new ArrayList<>();
         posts.add(new Scanner(System.in).nextLine());
         user.setPosts(posts);
     }

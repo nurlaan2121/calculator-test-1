@@ -1,4 +1,4 @@
-package service.MyExceptions;
+package MyExceptions;
 
 public class Notfoud extends RuntimeException {
     public Notfoud(String message) {
