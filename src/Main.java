@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         CalcService service = new CalcServiceImpl();
         Scanner scanner = new Scanner(System.in);
+
         Scanner scanForStr = new Scanner(System.in);
 
         LOOP:
