@@ -54,6 +54,7 @@ public class Main {
                 int numberTwo = scanner.nextInt();
                 System.out.print("Enter action(    {+} || {-} || {/} || {*}  ) ");
                 String action = scanForStr.nextLine();
+
                 switch (action){
                     case "+" -> System.out.println("Result: "+ service.toFold(numberOne, numberTwo));
                     case  "-" -> System.out.println("Result: "+ service.subtraction(numberOne, numberTwo));
