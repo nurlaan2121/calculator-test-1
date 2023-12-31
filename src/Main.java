@@ -10,11 +10,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-<<<<<<< HEAD
         System.out.println("My names Nurlan");
         System.out.println("My name is Nurlan");
-=======
->>>>>>> parent of c711207 (my last Commit)
         CalcService service = new CalcServiceImpl();
 
 
