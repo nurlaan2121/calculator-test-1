@@ -12,6 +12,21 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("My names Nurlan");
         CalcService service = new CalcServiceImpl();
+
+
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
+        System.out.println("Nurislam");
         Scanner scanner = new Scanner(System.in);
         Scanner scanForStr = new Scanner(System.in);
         DataBase dataBase = new DataBase();
