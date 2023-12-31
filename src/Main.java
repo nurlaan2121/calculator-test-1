@@ -14,6 +14,10 @@ public class Main {
         while (true){
             try {
                 System.out.println("\n");
+
+
+
+
                 System.out.print("Enter number one: ");
                 int numberOne = scanner.nextInt();
                 System.out.print("Enter number two: ");
