@@ -28,6 +28,7 @@ public class Main {
         System.out.println("Nurislam");
         System.out.println("Nurislam");
         Scanner scanner = new Scanner(System.in);
+
         Scanner scanForStr = new Scanner(System.in);
         DataBase dataBase = new DataBase();
         UserDaoImpl userDao = new UserDaoImpl(dataBase);
