@@ -42,6 +42,25 @@ public class Main {
                     0.Exit
                     """);
             try {
+<<<<<<< HEAD
+                System.out.println("\n");
+
+
+
+
+                System.out.print("Enter number one: ");
+                int numberOne = scanner.nextInt();
+                System.out.print("Enter number two: ");
+                int numberTwo = scanner.nextInt();
+                System.out.print("Enter action(    {+} || {-} || {/} || {*}  ) ");
+                String action = scanForStr.nextLine();
+                switch (action){
+                    case "+" -> System.out.println("Result: "+ service.toFold(numberOne, numberTwo));
+                    case  "-" -> System.out.println("Result: "+ service.subtraction(numberOne, numberTwo));
+                    case  "/" -> System.out.println("Result: " + service.device(numberOne,numberTwo));
+                    case  "*" -> System.out.println("Result: " + service.add(numberOne,numberTwo));
+                    default -> System.out.println("Incorrect choice");
+=======
                 int actionmain = new Scanner(System.in).nextInt();
                 switch (actionmain) {
                     case 1 -> {
@@ -141,6 +160,7 @@ public class Main {
                     case 0 -> {
                         break LOOPONE;
                     }
+>>>>>>> 02f9ca6f43791272ee30d25bfd8e8f74be2477c3
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Write number");
